@@ -9,7 +9,7 @@
           <div class="flex-1 auto p-1 mt-2">{{ contact.lastName }}</div>
           <div class="flex-1 auto p-1 mt-2">{{ contact.birthday | date:'YYYY-mm-dd' }}</div>
           <div class="flex-none auto p-1 mt-2">
-            <a href="#">Edit</a> |
+            <a [routerLink]="'/edit/'+contact.id">Edit</a> |
             <a href="#">Delete</a> 
           </div>
         </div>

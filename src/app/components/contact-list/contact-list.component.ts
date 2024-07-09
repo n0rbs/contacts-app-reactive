@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Contact } from '../../models/contact.models';
 import { DatePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'song-contact-list',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, RouterLink],
   templateUrl: './contact-list.component.html',
   styleUrl: './contact-list.component.css'
   })
@@ -16,6 +17,7 @@ export class ContactListComponent {
   constructor() {
     this.contacts = [
       {
+        id: 1,
         firstName: 'Norbert',
         lastName: 'Dela Pena',
         birthday: new Date(),
@@ -33,6 +35,7 @@ export class ContactListComponent {
         }
       },
       {
+        id: 2,
         firstName: 'Norbs',
         lastName: 'Dela Pena',
         birthday: new Date(),
@@ -50,6 +53,7 @@ export class ContactListComponent {
         }
       },
       {
+        id: 3,
         firstName: 'Aston',
         lastName: 'Cano',
         birthday: new Date(),
