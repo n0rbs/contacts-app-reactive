@@ -13,6 +13,6 @@ export const routes: Routes = [
     path: 'edit/:id', component: ContactEditComponent,
   },
   {
-    path: '', component: ContactListComponent,
+    path: '', redirectTo: 'home', pathMatch: 'full',
   },
 ];
