@@ -1,1 +1,60 @@
-<p>contact-edit works!</p>
+<div class="">
+  <form [formGroup]="contactForm" (ngSubmit)="saveContact()">
+    <section class="contact-info">
+      <div class="border-b-4 mb-4 mt-8">Information</div>
+      <div class="grid grid-cols-4 gap-4">
+        <div><label>First name</label></div>
+        <div><input class="border-4 rounded" formControlName="firstName"></div>
+      </div>
+      <div class="grid grid-cols-4 gap-4">
+        <div><label>Last name</label></div>
+        <div><input class="border-4 rounded" formControlName="lastName"></div>
+      </div>
+      <div class="grid grid-cols-4 gap-4">
+        <label>Birthday</label>
+        <input type="date" class="border-4 rounded" formControlName="birthday">
+      </div>
+    </section>
+    <section formGroupName="phone" class="phone">
+      <div class="border-b-4 mb-4 mt-8">Phone</div>
+      <div class="grid grid-cols-4 gap-4">
+        <label>Number</label>
+        <input class="border-4 rounded" formControlName="phoneNumber">
+      </div>
+      <div class="grid grid-cols-4 gap-4">
+        <label>Type</label>
+        <input class="border-4 rounded" formControlName="phoneType">
+      </div>
+    </section>
+    <section formGroupName="address" class="address">
+      <div class="border-b-4 mb-4 mt-8">Address</div>
+      <div class="grid grid-cols-4 gap-4">
+        <label>House number</label>
+        <input class="border-4 rounded" formControlName="houseNumber">
+      </div>
+      <div class="grid grid-cols-4 gap-4">
+        <label>Street</label>
+        <input class="border-4 rounded" formControlName="street">
+      </div>
+      <div class="grid grid-cols-4 gap-4">
+        <label>Barangay</label>
+        <input class="border-4 rounded" formControlName="barangay">
+      </div>
+      <div class="grid grid-cols-4 gap-4">
+        <label>City</label>
+        <input class="border-4 rounded" formControlName="city">
+      </div>
+      <div class="grid grid-cols-4 gap-4">
+        <label>Province</label>
+        <input class="border-4 rounded" formControlName="province">
+      </div>
+      <div class="grid grid-cols-4 gap-4">
+        <label>Postal Code</label>
+        <input class="border-4 rounded" formControlName="postalCode">
+      </div>
+    </section>
+    <div>
+      <button type="submit">Save</button>
+    </div>
+  </form>
+</div>
