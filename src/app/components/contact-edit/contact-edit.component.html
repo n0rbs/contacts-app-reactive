@@ -4,11 +4,28 @@
       <div class="border-b-4 mb-4 mt-8">Information</div>
       <div class="grid grid-cols-4 gap-4">
         <div><label>First name</label></div>
-        <div><input class="border-4 rounded" formControlName="firstName"></div>
+        <div>
+          <input class="border-4 rounded" formControlName="firstName">
+          <span
+            *ngIf="
+            firstName.errors?.['required']
+            && firstName.touched
+            "
+            class="icon-reactive material-symbols-outlined">cancel</span>
+          <span
+            *ngIf="
+            firstName.errors?.['minlength']
+            && firstName.touched
+            "
+          >Min length 5</span>
+        </div>
       </div>
       <div class="grid grid-cols-4 gap-4">
         <div><label>Last name</label></div>
-        <div><input class="border-4 rounded" formControlName="lastName"></div>
+        <div>
+          <input class="border-4 rounded" formControlName="lastName">
+          <span [class.error]="contactForm.controls.lastName.invalid" class="icon-reactive material-symbols-outlined">cancel</span>
+        </div>
       </div>
       <div class="grid grid-cols-4 gap-4">
         <label>Birthday</label>
@@ -54,7 +71,7 @@
       </div>
     </section>
     <div>
-      <button type="submit">Save</button>
+      <button class="rouned border-4 px-8" type="submit" [disabled]="contactForm.invalid">Save</button>
     </div>
   </form>
 </div>
