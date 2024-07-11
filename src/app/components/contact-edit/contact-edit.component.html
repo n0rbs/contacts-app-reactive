@@ -7,29 +7,63 @@
         <div>
           <input class="border-4 rounded" formControlName="firstName">
           <span
-            *ngIf="
-            firstName.errors?.['required']
-            && firstName.touched
+            [class.error]="
+              firstName.errors?.['required']
+              && firstName.touched
             "
-            class="icon-reactive material-symbols-outlined">cancel</span>
+            *ngIf="
+              firstName.errors?.['required']
+              && firstName.touched
+            ">Required first name</span>
           <span
-            *ngIf="
-            firstName.errors?.['minlength']
-            && firstName.touched
+            [class.error]="
+              firstName.errors?.['minlength']
+              && firstName.touched
             "
-          >Min length 5</span>
+            *ngIf="
+              firstName.errors?.['minlength']
+              && firstName.touched
+            "
+          >Min length 5 required</span>
         </div>
       </div>
       <div class="grid grid-cols-4 gap-4">
         <div><label>Last name</label></div>
         <div>
           <input class="border-4 rounded" formControlName="lastName">
-          <span [class.error]="contactForm.controls.lastName.invalid" class="icon-reactive material-symbols-outlined">cancel</span>
+          <span
+            [class.error]="
+              lastName.errors?.['required']
+              && lastName.touched
+            "
+            *ngIf="
+              lastName.errors?.['required']
+              && lastName.touched
+            ">Required last name</span>
+          <span
+            [class.error]="
+              lastName.errors?.['minlength']
+              && lastName.touched
+            "
+            *ngIf="
+              lastName.errors?.['minlength']
+              && lastName.touched
+            "
+          >Min length 5 required</span>
         </div>
       </div>
       <div class="grid grid-cols-4 gap-4">
         <label>Birthday</label>
         <input type="date" class="border-4 rounded" formControlName="birthday">
+        <span
+          [class.error]="
+            birthday.errors?.['required']
+            && birthday.touched
+          "
+          *ngIf="
+            birthday.errors?.['required']
+            && birthday.touched
+          ">Required birthday</span>
       </div>
     </section>
     <section formGroupName="phone" class="phone">
@@ -37,10 +71,52 @@
       <div class="grid grid-cols-4 gap-4">
         <label>Number</label>
         <input class="border-4 rounded" formControlName="phoneNumber">
+        <span
+          [class.error]="
+            phoneNumber.errors?.['required']
+            && phoneNumber.touched
+          "
+          *ngIf="
+            phoneNumber.errors?.['required']
+            && phoneNumber.touched
+          ">Required Phone Number</span>
+          <span
+            [class.error]="
+              phoneNumber.errors?.['minlength']
+              && phoneNumber.touched
+            "
+            *ngIf="
+              phoneNumber.errors?.['minlength']
+              && phoneNumber.touched
+            "
+          >Min length 8 required</span>
+          <span
+            [class.error]="
+              phoneNumber.errors?.['maxlength']
+              && phoneNumber.touched
+            "
+            *ngIf="
+              phoneNumber.errors?.['maxlength']
+              && phoneNumber.touched
+            "
+          >Max length 10 chars only</span>
       </div>
       <div class="grid grid-cols-4 gap-4">
         <label>Type</label>
-        <input class="border-4 rounded" formControlName="phoneType">
+        <select class="border-4 rounded" formControlName="phoneType">
+          @for(phoneType of phoneTypes;track phoneType) {
+            <option [value]="phoneType.value">{{ phoneType.title }}</option>
+          }
+        </select>
+        <span
+          [class.error]="
+            phoneType.errors?.['required']
+            && phoneType.touched
+          "
+          *ngIf="
+            phoneType.errors?.['required']
+            && phoneType.touched
+          ">Required Phone Type</span>
       </div>
     </section>
     <section formGroupName="address" class="address">
@@ -54,20 +130,64 @@
         <input class="border-4 rounded" formControlName="street">
       </div>
       <div class="grid grid-cols-4 gap-4">
-        <label>Barangay</label>
-        <input class="border-4 rounded" formControlName="barangay">
+        <label>Province</label>
+        <select (change)="buildAddressSelection()" class="border-4 rounded" formControlName="province">
+          <!-- @for(province of provinces;track province) {
+            <option [value]="province.value">{{ province.title }}</option>
+          } -->
+        </select>
+        <span
+          [class.error]="
+            province.errors?.['required']
+            && province.touched
+          "
+          *ngIf="
+            province.errors?.['required']
+            && province.touched
+          ">Required Province</span>
       </div>
       <div class="grid grid-cols-4 gap-4">
         <label>City</label>
-        <input class="border-4 rounded" formControlName="city">
+        <select (change)="buildAddressSelection()" class="border-4 rounded" formControlName="city">
+          <!-- @for(city of tempCities;track city) {
+            <option [value]="city?.['value']">{{ city?.['title'] }}</option>
+          } -->
+        </select>
+        <span
+          [class.error]="
+            city.errors?.['required']
+            && city.touched
+          "
+          *ngIf="
+            city.errors?.['required']
+            && city.touched
+          ">Required City</span>
       </div>
       <div class="grid grid-cols-4 gap-4">
-        <label>Province</label>
-        <input class="border-4 rounded" formControlName="province">
+        <label>Barangay</label>
+        <input class="border-4 rounded" formControlName="barangay">
+        <span
+          [class.error]="
+            barangay.errors?.['required']
+            && barangay.touched
+          "
+          *ngIf="
+            barangay.errors?.['required']
+            && barangay.touched
+          ">Required Barangay</span>
       </div>
       <div class="grid grid-cols-4 gap-4">
         <label>Postal Code</label>
         <input class="border-4 rounded" formControlName="postalCode">
+        <span
+          [class.error]="
+            postalCode.errors?.['required']
+            && postalCode.touched
+          "
+          *ngIf="
+            postalCode.errors?.['required']
+            && postalCode.touched
+          ">Required Postal Code</span>
       </div>
     </section>
     <div>

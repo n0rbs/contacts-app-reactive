@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, Validators, NgSelectOption } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
-import { Barangays, Cities, Provinces } from '../../constants/data';
+import { Address, SelectOption } from '../../models/contact.models';
+import { Barangays, Cities, Provinces, PhoneTypes } from '../../constants/data';
 
 @Component({
   selector: 'song-contact-edit',
@@ -16,6 +17,10 @@ export class ContactEditComponent implements OnInit {
   provinces = Provinces;
   cities = Cities;
   barangays = Barangays;
+  phoneTypes = PhoneTypes;
+  tempProvinces = Array<SelectOption>;
+  tempCities = Array<SelectOption>;
+  tempBarangays = Array<SelectOption>;
   contactForm = this.formBuilder.group({
     firstName: ['', [
       Validators.required,
@@ -26,16 +31,32 @@ export class ContactEditComponent implements OnInit {
     ]],
     birthday: ['', Validators.required],
     phone: this.formBuilder.group({
-      phoneNumber: ['', Validators.required],
-      phoneType: ['', Validators.required],
+      phoneNumber: ['', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(10),
+      ]],
+      phoneType: ['', [
+        Validators.required,
+      ]],
     }),
     address: this.formBuilder.group({
-      houseNumber: ['', Validators.required],
-      street: ['', Validators.required],
-      barangay: ['', Validators.required],
-      city: ['', Validators.required],
-      province: ['', Validators.required],
-      postalCode: ['', Validators.required],
+      houseNumber: ['', [
+      ]],
+      street: ['', [
+      ]],
+      barangay: ['', [
+        Validators.required,
+      ]],
+      city: ['', [
+        Validators.required,
+      ]],
+      province: ['', [
+        Validators.required,
+      ]],
+      postalCode: ['', [
+        Validators.required,
+      ]],
     }),
   });
 
@@ -44,11 +65,51 @@ export class ContactEditComponent implements OnInit {
   ngOnInit() {
   }
 
+  buildAddressSelection() {
+    const tempAddress = this.contactForm.controls.address.controls;
+    if (!tempAddress.province.value) {
+      console.log('Province required')
+      return;
+    } else {
+      //TODO: Assign list of cities under province
+      let index = 'manila';
+    }
+    if (!tempAddress.city.value) {
+      console.log('City required')
+      return;
+    }
+    if (!tempAddress.barangay.value) {
+      console.log('Barangay required')
+      return;
+    }
+  }
+
   get firstName() {
     return this.contactForm.controls.firstName;
   }
   get lastName() {
     return this.contactForm.controls.lastName;
+  }
+  get birthday() {
+    return this.contactForm.controls.birthday;
+  }
+  get phoneNumber() {
+    return this.contactForm.controls.phone.controls.phoneNumber;
+  }
+  get phoneType() {
+    return this.contactForm.controls.phone.controls.phoneType;
+  }
+  get province() {
+    return this.contactForm.controls.address.controls.province;
+  }
+  get city() {
+    return this.contactForm.controls.address.controls.city;
+  }
+  get barangay() {
+    return this.contactForm.controls.address.controls.barangay;
+  }
+  get postalCode() {
+    return this.contactForm.controls.address.controls.postalCode;
   }
 
   saveContact() {
