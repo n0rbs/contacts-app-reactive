@@ -4,7 +4,9 @@ import { ReactiveFormsModule, FormBuilder, Validators, NgSelectOption } from '@a
 import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { Address, SelectOption } from '../../models/contact.models';
-import { Barangays, Cities, Provinces, PhoneTypes } from '../../constants/data';
+import { BarangaysList, CitiesList, Provinces, PhoneTypes } from '../../constants/data';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Contacts } from '../../constants/data';
 
 @Component({
   selector: 'song-contact-edit',
@@ -15,13 +17,11 @@ import { Barangays, Cities, Provinces, PhoneTypes } from '../../constants/data';
 })
 export class ContactEditComponent implements OnInit {
   provinces = Provinces;
-  cities = Cities;
-  barangays = Barangays;
+  cities = CitiesList;
+  barangays = BarangaysList;
   phoneTypes = PhoneTypes;
-  tempProvinces = Array<SelectOption>;
-  tempCities = Array<SelectOption>;
-  tempBarangays = Array<SelectOption>;
   contactForm = this.formBuilder.group({
+    id: [0],
     firstName: ['', [
       Validators.required,
       Validators.minLength(5),
@@ -31,7 +31,7 @@ export class ContactEditComponent implements OnInit {
     ]],
     birthday: ['', Validators.required],
     phone: this.formBuilder.group({
-      phoneNumber: ['', [
+      phoneNumber: [0, [
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(10),
@@ -54,15 +54,31 @@ export class ContactEditComponent implements OnInit {
       province: ['', [
         Validators.required,
       ]],
-      postalCode: ['', [
+      postalCode: [0, [
         Validators.required,
       ]],
     }),
   });
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+  ) {}
 
   ngOnInit() {
+    // TODO: Set values of form for edit action
+    // this.contactForm.setValue()
+    this.activatedRoute.params.subscribe(({ id: paramId }) => {
+      if (paramId !== null) {
+        const editContact = Contacts?.[paramId];
+        this.contactForm.setValue(editContact);
+      }
+    });    
+  }
+
+  exitForm() {
+    this.router.navigate(['/home'])
   }
 
   buildAddressSelection() {

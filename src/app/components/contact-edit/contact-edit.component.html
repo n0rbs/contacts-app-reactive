@@ -132,9 +132,9 @@
       <div class="grid grid-cols-4 gap-4">
         <label>Province</label>
         <select (change)="buildAddressSelection()" class="border-4 rounded" formControlName="province">
-          <!-- @for(province of provinces;track province) {
+          @for(province of provinces;track province) {
             <option [value]="province.value">{{ province.title }}</option>
-          } -->
+          }
         </select>
         <span
           [class.error]="
@@ -149,9 +149,9 @@
       <div class="grid grid-cols-4 gap-4">
         <label>City</label>
         <select (change)="buildAddressSelection()" class="border-4 rounded" formControlName="city">
-          <!-- @for(city of tempCities;track city) {
+          @for(city of cities;track city) {
             <option [value]="city?.['value']">{{ city?.['title'] }}</option>
-          } -->
+          }
         </select>
         <span
           [class.error]="
@@ -165,7 +165,11 @@
       </div>
       <div class="grid grid-cols-4 gap-4">
         <label>Barangay</label>
-        <input class="border-4 rounded" formControlName="barangay">
+        <select (change)="buildAddressSelection()" class="border-4 rounded" formControlName="barangay">
+          @for(barangay of barangays;track barangay) {
+            <option [value]="barangay?.['value']">{{ barangay?.['title'] }}</option>
+          }
+        </select>
         <span
           [class.error]="
             barangay.errors?.['required']
@@ -191,6 +195,7 @@
       </div>
     </section>
     <div>
+      <button class="rouned border-4 px-8" (click)="exitForm()">Cancel</button>
       <button class="rouned border-4 px-8" type="submit" [disabled]="contactForm.invalid">Save</button>
     </div>
   </form>
