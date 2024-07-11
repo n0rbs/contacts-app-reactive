@@ -1,4 +1,4 @@
-export const phoneTypes = [
+export const PhoneTypes = [
   { title: 'Home', value: 'home' },
   { title: 'Work', value: 'work' },
 ];

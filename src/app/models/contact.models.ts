@@ -20,3 +20,8 @@ export interface Address {
   province: string,
   postalCode: number,
 }
+
+export interface SelectOption {
+  title: string,
+  value: string,
+}
