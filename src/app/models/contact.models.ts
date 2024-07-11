@@ -1,8 +1,8 @@
 export interface Contact {
-  id: number,
+  id: number | null,
   firstName: string,
   lastName: string,
-  birthday: Date | null,
+  birthday: string | null,
   phone: Phone,
   address: Address
 }
@@ -19,4 +19,9 @@ export interface Address {
   city: string,
   province: string,
   postalCode: number,
+}
+
+export interface SelectOption {
+  title: string,
+  value: string,
 }
