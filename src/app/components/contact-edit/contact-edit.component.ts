@@ -67,11 +67,11 @@ export class ContactEditComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // TODO: Set values of form for edit action
-    // this.contactForm.setValue()
+    // Set values of form for edit action
     this.activatedRoute.params.subscribe(({ id: paramId }) => {
       if (paramId !== null) {
-        const editContact = Contacts?.[paramId];
+        // Iterate and fetch the contact with the ID
+        const [editContact] = Contacts?.filter((contact) => contact.id === parseInt(paramId));
         this.contactForm.setValue(editContact);
       }
     });    
