@@ -3,7 +3,7 @@ export const Contacts = [
     id: 1,
     firstName: 'Norbert',
     lastName: 'Dela Pena',
-    birthday: '1999-11-01',
+    birthday: new Date('1999-11-01'),
     phone: {
       phoneNumber: 1234423,
       phoneType: 'work',
@@ -21,7 +21,7 @@ export const Contacts = [
     id: 2,
     firstName: 'Norbs',
     lastName: 'Dela Pena',
-    birthday: '1998-11-02',
+    birthday: new Date('1998-11-02'),
     phone: {
       phoneNumber: 123213,
       phoneType: 'work',
@@ -39,7 +39,7 @@ export const Contacts = [
     id: 3,
     firstName: 'Aston',
     lastName: 'Cano',
-    birthday: '1997-11-03',
+    birthday: new Date('1997-11-03'),
     phone: {
       phoneNumber: 273482,
       phoneType: 'home',
@@ -53,6 +53,25 @@ export const Contacts = [
       postalCode: 6014,
     }
   },
+  {
+    id: 4,
+    firstName: 'John',
+    lastName: 'Doe',
+    birthday: new Date('1996-11-04'),
+    phone: {
+      phoneNumber: 27348212,
+      phoneType: 'work',
+    },
+    address: {
+      houseNumber: '123',
+      street: 'Mindanao drive',
+      barangay: 'banilad',
+      city: 'cebu',
+      province: 'cebu',
+      postalCode: 6000,
+    }
+  },
+
 ];
 
 export const PhoneTypes = [

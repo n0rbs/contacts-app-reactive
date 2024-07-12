@@ -20,7 +20,7 @@ export class ContactEditComponent implements OnInit {
   cities = CitiesList;
   barangays = BarangaysList;
   phoneTypes = PhoneTypes;
-  contactForm = this.formBuilder.group({
+  contactForm = this.formBuilder.nonNullable.group({
     id: [0],
     firstName: ['', [
       Validators.required,
@@ -29,9 +29,9 @@ export class ContactEditComponent implements OnInit {
     lastName: ['', [
       Validators.required
     ]],
-    birthday: ['', Validators.required],
-    phone: this.formBuilder.group({
-      phoneNumber: [0, [
+    birthday: [<Date | null>null, Validators.required],
+    phone: this.formBuilder.nonNullable.group({
+      phoneNumber: [<number | null>null, [
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(10),
@@ -40,7 +40,7 @@ export class ContactEditComponent implements OnInit {
         Validators.required,
       ]],
     }),
-    address: this.formBuilder.group({
+    address: this.formBuilder.nonNullable.group({
       houseNumber: ['', [
       ]],
       street: ['', [
@@ -54,7 +54,7 @@ export class ContactEditComponent implements OnInit {
       province: ['', [
         Validators.required,
       ]],
-      postalCode: [0, [
+      postalCode: [<number | null>null, [
         Validators.required,
       ]],
     }),
@@ -67,11 +67,11 @@ export class ContactEditComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // TODO: Set values of form for edit action
-    // this.contactForm.setValue()
+    // Set values of form for edit action
     this.activatedRoute.params.subscribe(({ id: paramId }) => {
       if (paramId !== null) {
-        const editContact = Contacts?.[paramId];
+        // Iterate and fetch the contact with the ID
+        const [editContact] = Contacts?.filter((contact) => contact.id === parseInt(paramId));
         this.contactForm.setValue(editContact);
       }
     });    
@@ -129,5 +129,6 @@ export class ContactEditComponent implements OnInit {
   }
 
   saveContact() {
+    console.log(this.contactForm.valid);
   }
 }
